@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 // By Will Papper
 // Example NFT contract for the Syndicate Frame API
+// Modified by EpicDylan for Deploy on Degen Week
+// Page Open Source Project 
 
 pragma solidity ^0.8.20;
 
@@ -39,7 +41,7 @@ contract SyndicateFrameNFT is ERC721, Ownable {
     uint256 public collectedDEGEN;
 
     constructor() ERC721("SyndicateFrameNFT", "SYNFRAME") Ownable(msg.sender) {
-        defaultURI = "ipfs://QmSFqezaUhBKr32Z2vgFrbDPGYdbcj8zQcQvsDqbU6b6UH";
+        defaultURI = "https://ipfs.io/ipfs/QmWKBk8YzBgkH1nhbaiXba3JuWTJDukZTPDiZWx7RJZ1u7";
         maxMintPerAddress = 1;
     }
 
