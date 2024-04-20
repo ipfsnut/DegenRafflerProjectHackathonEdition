@@ -11,7 +11,7 @@ import {Ownable} from "../lib/openzeppelin-contracts/contracts/access/Ownable.so
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 // $DEGEN token contract address
-address constant DEGEN_TOKEN_ADDRESS = 0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed;
+address constant DEGEN_TOKEN_ADDRESS = 0x888F05D02ea7B42f32f103C089c1750170830642;
 
 contract SyndicateFrameNFT is ERC721, Ownable {
     uint256 public currentTokenId = 0;
@@ -107,4 +107,8 @@ contract SyndicateFrameNFT is ERC721, Ownable {
     fallback() external payable {
         revert("FrameNFTs: Does not accept ETH");
     }
+    receive() external payable {
+    revert("FrameNFTs: Does not accept ETH");
+    }
+
 }
