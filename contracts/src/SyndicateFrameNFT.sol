@@ -2,7 +2,7 @@
 // By Will Papper
 // Example NFT contract for the Syndicate Frame API
 // Modified by EpicDylan for Deploy on Degen Week
-// Page Open Source Project 
+// Page Open Source Project
 
 pragma solidity ^0.8.20;
 
@@ -17,12 +17,12 @@ contract SyndicateFrameNFT is ERC721, Ownable {
     uint256 public currentTokenId = 0;
     string public defaultURI;
 
-    mapping(uint256 tokenId => string tokenURI) public tokenURIs;
-    mapping(uint256 tokenId => bool locked) public lockedTokenURIs;
+    mapping(uint256 => string) public tokenURIs;
+    mapping(uint256 => bool) public lockedTokenURIs;
 
     // Keep track of mint limits
     uint256 public maxMintPerAddress;
-    mapping(address minted => uint256 count) public mintCount;
+    mapping(address => uint256) public mintCount;
 
     event DefaultTokenURISet(string tokenURI);
     event TokenURISet(uint256 indexed tokenId, string tokenURI);
@@ -34,7 +34,10 @@ contract SyndicateFrameNFT is ERC721, Ownable {
     }
 
     modifier onlyBelowMaxMint(address to) {
-        require(mintCount[to] < maxMintPerAddress, "FrameNFTs: Max mint reached");
+        require(
+            mintCount[to] < maxMintPerAddress,
+            "FrameNFTs: Max mint reached"
+        );
         _;
     }
 
@@ -45,9 +48,16 @@ contract SyndicateFrameNFT is ERC721, Ownable {
         maxMintPerAddress = 1;
     }
 
-    function mint(address to) public onlyBelowMaxMint(to) {
+    function mint(address to) public {
         // Charge 100 $DEGEN tokens for the mint
-        require(IERC20(DEGEN_TOKEN_ADDRESS).transferFrom(msg.sender, address(this), 100 * 10**18), "FrameNFTs: Failed to transfer $DEGEN");
+        require(
+            IERC20(DEGEN_TOKEN_ADDRESS).transferFrom(
+                msg.sender,
+                address(this),
+                100 * 10**18
+            ),
+            "Failed to transfer $DEGEN"
+        );
 
         ++currentTokenId;
         ++mintCount[to];
@@ -57,7 +67,10 @@ contract SyndicateFrameNFT is ERC721, Ownable {
         collectedDEGEN += 100 * 10**18;
     }
 
-    function mint(address to, string memory _tokenURI) public onlyBelowMaxMint(to) {
+    function mint(address to, string memory _tokenURI)
+        public
+        onlyBelowMaxMint(to)
+    {
         ++currentTokenId;
         ++mintCount[to];
         tokenURIs[currentTokenId] = _tokenURI;
@@ -86,7 +99,13 @@ contract SyndicateFrameNFT is ERC721, Ownable {
         emit DefaultTokenURISet(_tokenURI);
     }
 
-    function tokenURI(uint256 tokenId) public view virtual override(ERC721) returns (string memory) {
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        virtual
+        override(ERC721)
+        returns (string memory)
+    {
         if (bytes(tokenURIs[tokenId]).length > 0) {
             return tokenURIs[tokenId];
         } else {
@@ -99,16 +118,19 @@ contract SyndicateFrameNFT is ERC721, Ownable {
     }
 
     function withdrawDEGEN(uint256 amount) public onlyOwner {
-        require(amount <= collectedDEGEN, "FrameNFTs: Insufficient $DEGEN balance");
-        require(IERC20(DEGEN_TOKEN_ADDRESS).transfer(msg.sender, amount), "FrameNFTs: Failed to transfer $DEGEN");
+        require(amount <= collectedDEGEN, "Insufficient $DEGEN balance");
+        require(
+            IERC20(DEGEN_TOKEN_ADDRESS).transfer(msg.sender, amount),
+            "Failed to transfer $DEGEN"
+        );
         collectedDEGEN -= amount;
     }
 
-    fallback() external payable {
-        revert("FrameNFTs: Does not accept ETH");
-    }
     receive() external payable {
-    revert("FrameNFTs: Does not accept ETH");
+        revert("Does not accept ETH");
     }
 
+    fallback() external payable {
+        revert("Does not accept ETH");
+    }
 }
