@@ -10,7 +10,7 @@ import {ERC721} from "../lib/openzeppelin-contracts/contracts/token/ERC721//ERC7
 import {Ownable} from "../lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-// $DEGEN token contract address on Base network
+// $DEGEN token contract address
 address constant DEGEN_TOKEN_ADDRESS = 0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed;
 
 contract SyndicateFrameNFT is ERC721, Ownable {
@@ -40,7 +40,7 @@ contract SyndicateFrameNFT is ERC721, Ownable {
 
     uint256 public collectedDEGEN;
 
-    constructor() ERC721("SyndicateFrameNFT", "SYNFRAME") Ownable(msg.sender) {
+    constructor() ERC721("PageDAO Ticket NFT", "TICK1") Ownable(msg.sender) {
         defaultURI = "https://ipfs.io/ipfs/QmWKBk8YzBgkH1nhbaiXba3JuWTJDukZTPDiZWx7RJZ1u7";
         maxMintPerAddress = 1;
     }
