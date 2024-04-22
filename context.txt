@@ -1,0 +1,23 @@
+Context Update:
+
+We have set up a basic React application using Create React App in the 'client' directory of the project. This React application will serve as the front-end for our NFT minting site.
+
+Inside the 'client/src/components' directory, we have created a new component called 'MintNFT.js'. This component will handle the functionality of connecting the user's MetaMask wallet and initiating the NFT minting process.
+
+The 'MintNFT.js' component imports the necessary dependencies, including the 'web3.js' library for interacting with the Ethereum blockchain and the user's MetaMask wallet.
+
+We have also created two files in the 'client/src/contracts' directory:
+
+1. 'ContractABI.json': This file contains the Application Binary Interface (ABI) of our smart contract in JSON format.
+2. 'ContractBytecode.json': This file contains the bytecode of our smart contract in JSON format.
+
+The 'MintNFT.js' component imports the contract ABI and bytecode from these files and uses them to create an instance of the contract using the 'web3.js' library.
+
+The component provides two main functions:
+
+1. 'connectWallet': This function prompts the user to connect their MetaMask wallet and retrieves the user's Ethereum account address.
+2. 'mintNFT': This function constructs and sends a transaction to the smart contract's 'mintFree' function, allowing the user to mint a new NFT. The function takes the necessary parameters, such as the token URI and the user's account address.
+
+The component renders a button to connect the user's wallet if it's not already connected, and once connected, it renders a button to initiate the NFT minting process.
+
+With this setup, we have laid the foundation for the front-end of our NFT minting site. The next steps would involve integrating the front-end with the back-end server, handling the minting process on the server-side, and implementing any additional functionality or enhancements required for the application.
