@@ -9,7 +9,7 @@ const MintNFT = () => {
   const [mintAmount, setMintAmount] = useState(1);
 
   // Hardcoded contract address
-  const contractAddress = '0xf2831E590DdF06b091A88d00907e70C38A8B4F9f';
+  const contractAddress = '0x129000A1d3c9f1dEcb706Ae45C8B73ADf2772b93';
   const contractNetworkId = 666666666; // Degen Mainnet network ID
   const contractNetworkName = 'degen'; // Degen Mainnet network name
 
