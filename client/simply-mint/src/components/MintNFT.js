@@ -6,9 +6,12 @@ const MintNFT = () => {
   const [web3, setWeb3] = useState(null);
   const [account, setAccount] = useState(null);
   const [mintStatus, setMintStatus] = useState('');
+  const [mintAmount, setMintAmount] = useState(1);
 
   // Hardcoded contract address
-  const contractAddress = '0xbB18053Bf1a3E83c1E9f5B0B76CbfC66344cBC01';
+  const contractAddress = '0xf2831E590DdF06b091A88d00907e70C38A8B4F9f';
+  const contractNetworkId = 666666666; // Degen Mainnet network ID
+  const contractNetworkName = 'degen'; // Degen Mainnet network name
 
   const connectWallet = async () => {
     try {
@@ -22,6 +25,14 @@ const MintNFT = () => {
       // Get the user's Ethereum account
       const accounts = await web3Instance.eth.getAccounts();
       setAccount(accounts[0]);
+
+      // Check if the user is connected to the correct network
+      const networkId = await web3Instance.eth.net.getId();
+      const networkName = await web3Instance.eth.net.getNetworkType();
+
+      if (networkId !== contractNetworkId || networkName !== contractNetworkName) {
+        console.error('Please connect to the Degen Mainnet network');
+      }
     } catch (error) {
       console.error('Error connecting to MetaMask:', error);
     }
@@ -41,13 +52,12 @@ const MintNFT = () => {
       const contract = new web3.eth.Contract(contractABI, contractAddress);
 
       // Find the mint function name from the ABI
-      const mintFunctionName = contractABI.find(item => item.type === 'function' && item.name === 'mintFree').name;
+      const mintFunctionName = contractABI.find(item => item.type === 'function' && item.name === 'mint').name;
 
       // Construct the minting transaction
-      const tokenURI = 'https://example.com/token-metadata';
-      const tx = await contract.methods[mintFunctionName](account, tokenURI).send({ from: account });
+      const tx = await contract.methods[mintFunctionName](account, mintAmount).send({ from: account });
 
-      setMintStatus(`NFT minted successfully! Transaction hash: ${tx.transactionHash}`);
+      setMintStatus(`${mintAmount} NFT(s) minted successfully! Transaction hash: ${tx.transactionHash}`);
     } catch (error) {
       console.error('Error minting NFT:', error);
       setMintStatus('Error minting NFT. Please try again.');
@@ -60,7 +70,15 @@ const MintNFT = () => {
       {!web3 || !account ? (
         <button onClick={connectWallet}>Connect Wallet</button>
       ) : (
-        <button onClick={mintNFT}>Mint NFT</button>
+        <>
+          <input
+            type="number"
+            value={mintAmount}
+            onChange={(e) => setMintAmount(parseInt(e.target.value))}
+            min="1"
+          />
+          <button onClick={mintNFT}>Mint NFT</button>
+        </>
       )}
       <p>{mintStatus}</p>
     </div>

@@ -3,30 +3,23 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "to",
+				"name": "spender",
 				"type": "address"
 			},
 			{
 				"internalType": "uint256",
-				"name": "tokenId",
+				"name": "value",
 				"type": "uint256"
 			}
 		],
 		"name": "approve",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
+		"outputs": [
 			{
-				"internalType": "uint256",
-				"name": "degenAmount",
-				"type": "uint256"
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
 			}
 		],
-		"name": "approveDEGEN",
-		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -34,7 +27,7 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "tokenId",
+				"name": "value",
 				"type": "uint256"
 			}
 		],
@@ -46,23 +39,79 @@
 	{
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "_defaultURI",
-				"type": "string"
-			},
-			{
 				"internalType": "address",
-				"name": "initialOwner",
+				"name": "account",
 				"type": "address"
 			},
 			{
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "burnFrom",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
-				"name": "_degenRecipient",
+				"name": "initialOwner",
 				"type": "address"
 			}
 		],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "ECDSAInvalidSignature",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "length",
+				"type": "uint256"
+			}
+		],
+		"name": "ECDSAInvalidSignatureLength",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "s",
+				"type": "bytes32"
+			}
+		],
+		"name": "ECDSAInvalidSignatureS",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "spender",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "allowance",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "needed",
+				"type": "uint256"
+			}
+		],
+		"name": "ERC20InsufficientAllowance",
+		"type": "error"
 	},
 	{
 		"inputs": [
@@ -73,32 +122,16 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "tokenId",
+				"name": "balance",
 				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			}
-		],
-		"name": "ERC721IncorrectOwner",
-		"type": "error"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "operator",
-				"type": "address"
 			},
 			{
 				"internalType": "uint256",
-				"name": "tokenId",
+				"name": "needed",
 				"type": "uint256"
 			}
 		],
-		"name": "ERC721InsufficientApproval",
+		"name": "ERC20InsufficientBalance",
 		"type": "error"
 	},
 	{
@@ -109,29 +142,7 @@
 				"type": "address"
 			}
 		],
-		"name": "ERC721InvalidApprover",
-		"type": "error"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "operator",
-				"type": "address"
-			}
-		],
-		"name": "ERC721InvalidOperator",
-		"type": "error"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			}
-		],
-		"name": "ERC721InvalidOwner",
+		"name": "ERC20InvalidApprover",
 		"type": "error"
 	},
 	{
@@ -142,7 +153,7 @@
 				"type": "address"
 			}
 		],
-		"name": "ERC721InvalidReceiver",
+		"name": "ERC20InvalidReceiver",
 		"type": "error"
 	},
 	{
@@ -153,58 +164,77 @@
 				"type": "address"
 			}
 		],
-		"name": "ERC721InvalidSender",
+		"name": "ERC20InvalidSender",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "spender",
+				"type": "address"
+			}
+		],
+		"name": "ERC20InvalidSpender",
 		"type": "error"
 	},
 	{
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "tokenId",
+				"name": "deadline",
 				"type": "uint256"
 			}
 		],
-		"name": "ERC721NonexistentToken",
+		"name": "ERC2612ExpiredSignature",
 		"type": "error"
 	},
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "signer",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			}
+		],
+		"name": "ERC2612InvalidSigner",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "EnforcedPause",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "ExpectedPause",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			},
+			{
 				"internalType": "uint256",
-				"name": "tokenId",
+				"name": "currentNonce",
 				"type": "uint256"
 			}
 		],
-		"name": "lockTokenURI",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		"name": "InvalidAccountNonce",
+		"type": "error"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "to",
-				"type": "address"
-			}
-		],
-		"name": "mint",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "to",
-				"type": "address"
-			}
-		],
-		"name": "mintFree",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		"inputs": [],
+		"name": "InvalidShortString",
+		"type": "error"
 	},
 	{
 		"inputs": [
@@ -215,11 +245,11 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "degenAmount",
+				"name": "amount",
 				"type": "uint256"
 			}
 		],
-		"name": "mintWithDEGEN",
+		"name": "mint",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -247,29 +277,15 @@
 		"type": "error"
 	},
 	{
-		"anonymous": false,
 		"inputs": [
 			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "approved",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
+				"internalType": "string",
+				"name": "str",
+				"type": "string"
 			}
 		],
-		"name": "Approval",
-		"type": "event"
+		"name": "StringTooLong",
+		"type": "error"
 	},
 	{
 		"anonymous": false,
@@ -283,17 +299,23 @@
 			{
 				"indexed": true,
 				"internalType": "address",
-				"name": "operator",
+				"name": "spender",
 				"type": "address"
 			},
 			{
 				"indexed": false,
-				"internalType": "bool",
-				"name": "approved",
-				"type": "bool"
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
 			}
 		],
-		"name": "ApprovalForAll",
+		"name": "Approval",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [],
+		"name": "EIP712DomainChanged",
 		"type": "event"
 	},
 	{
@@ -317,6 +339,69 @@
 	},
 	{
 		"inputs": [],
+		"name": "pause",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "Paused",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "spender",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "deadline",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "v",
+				"type": "uint8"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "r",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "s",
+				"type": "bytes32"
+			}
+		],
+		"name": "permit",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "renounceOwnership",
 		"outputs": [],
 		"stateMutability": "nonpayable",
@@ -326,99 +411,23 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "from",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
 				"name": "to",
 				"type": "address"
 			},
 			{
 				"internalType": "uint256",
-				"name": "tokenId",
+				"name": "value",
 				"type": "uint256"
 			}
 		],
-		"name": "safeTransferFrom",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "from",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "to",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bytes",
-				"name": "data",
-				"type": "bytes"
-			}
-		],
-		"name": "safeTransferFrom",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "operator",
-				"type": "address"
-			},
+		"name": "transfer",
+		"outputs": [
 			{
 				"internalType": "bool",
-				"name": "approved",
+				"name": "",
 				"type": "bool"
 			}
 		],
-		"name": "setApprovalForAll",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_tokenURI",
-				"type": "string"
-			}
-		],
-		"name": "setDefaultTokenURI",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "_tokenURI",
-				"type": "string"
-			}
-		],
-		"name": "setTokenURI",
-		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -438,9 +447,9 @@
 				"type": "address"
 			},
 			{
-				"indexed": true,
+				"indexed": false,
 				"internalType": "uint256",
-				"name": "tokenId",
+				"name": "value",
 				"type": "uint256"
 			}
 		],
@@ -461,12 +470,18 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "tokenId",
+				"name": "value",
 				"type": "uint256"
 			}
 		],
 		"name": "transferFrom",
-		"outputs": [],
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -485,16 +500,53 @@
 	},
 	{
 		"inputs": [],
-		"name": "withdrawDEGEN",
+		"name": "unpause",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "Unpaused",
+		"type": "event"
 	},
 	{
 		"inputs": [
 			{
 				"internalType": "address",
 				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "spender",
+				"type": "address"
+			}
+		],
+		"name": "allowance",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "account",
 				"type": "address"
 			}
 		],
@@ -511,12 +563,12 @@
 	},
 	{
 		"inputs": [],
-		"name": "collectedDEGEN",
+		"name": "decimals",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"internalType": "uint8",
 				"name": "",
-				"type": "uint256"
+				"type": "uint8"
 			}
 		],
 		"stateMutability": "view",
@@ -524,12 +576,12 @@
 	},
 	{
 		"inputs": [],
-		"name": "currentTokenId",
+		"name": "DOMAIN_SEPARATOR",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"internalType": "bytes32",
 				"name": "",
-				"type": "uint256"
+				"type": "bytes32"
 			}
 		],
 		"stateMutability": "view",
@@ -537,119 +589,42 @@
 	},
 	{
 		"inputs": [],
-		"name": "defaultURI",
+		"name": "eip712Domain",
 		"outputs": [
+			{
+				"internalType": "bytes1",
+				"name": "fields",
+				"type": "bytes1"
+			},
 			{
 				"internalType": "string",
-				"name": "",
+				"name": "name",
 				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "degenRecipient",
-		"outputs": [
+			},
 			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "degenToken",
-		"outputs": [
-			{
-				"internalType": "contract IERC20",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
+				"internalType": "string",
+				"name": "version",
+				"type": "string"
+			},
 			{
 				"internalType": "uint256",
-				"name": "tokenId",
+				"name": "chainId",
 				"type": "uint256"
-			}
-		],
-		"name": "getApproved",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "hasMintedFree",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
 			},
 			{
 				"internalType": "address",
-				"name": "operator",
+				"name": "verifyingContract",
 				"type": "address"
-			}
-		],
-		"name": "isApprovedForAll",
-		"outputs": [
+			},
 			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
+				"internalType": "bytes32",
+				"name": "salt",
+				"type": "bytes32"
+			},
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "lockedTokenURIs",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
+				"internalType": "uint256[]",
+				"name": "extensions",
+				"type": "uint256[]"
 			}
 		],
 		"stateMutability": "view",
@@ -669,6 +644,25 @@
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			}
+		],
+		"name": "nonces",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "owner",
 		"outputs": [
@@ -682,33 +676,8 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "ownerOf",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "bytes4",
-				"name": "interfaceId",
-				"type": "bytes4"
-			}
-		],
-		"name": "supportsInterface",
+		"inputs": [],
+		"name": "paused",
 		"outputs": [
 			{
 				"internalType": "bool",
@@ -733,38 +702,13 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "tokenURI",
+		"inputs": [],
+		"name": "totalSupply",
 		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
 			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
-			}
-		],
-		"name": "tokenURIs",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
 			}
 		],
 		"stateMutability": "view",
