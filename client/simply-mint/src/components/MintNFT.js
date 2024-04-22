@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import Web3 from 'web3';
-import contractABI from './contractABI.json'; // Import the contract ABI
-import { contractAddress } from './contractAddress'; // Import the contract address
+import contractABI from '../contracts/ContractABI.json';
 
 const MintNFT = () => {
   const [web3, setWeb3] = useState(null);
   const [account, setAccount] = useState(null);
   const [mintStatus, setMintStatus] = useState('');
+
+  // Hardcoded contract address
+  const contractAddress = '0xbB18053Bf1a3E83c1E9f5B0B76CbfC66344cBC01';
 
   const connectWallet = async () => {
     try {
